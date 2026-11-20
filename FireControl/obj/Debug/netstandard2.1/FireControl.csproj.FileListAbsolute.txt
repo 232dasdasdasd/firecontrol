@@ -1,0 +1,10 @@
+C:\Users\Fabio van Well\Desktop\modding\FireControl\obj\Debug\netstandard2.1\FireControl.csproj.AssemblyReference.cache
+C:\Users\Fabio van Well\Desktop\modding\FireControl\obj\Debug\netstandard2.1\FireControl.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Fabio van Well\Desktop\modding\FireControl\obj\Debug\netstandard2.1\FireControl.AssemblyInfoInputs.cache
+C:\Users\Fabio van Well\Desktop\modding\FireControl\obj\Debug\netstandard2.1\FireControl.AssemblyInfo.cs
+C:\Users\Fabio van Well\Desktop\modding\FireControl\obj\Debug\netstandard2.1\FireControl.csproj.CoreCompileInputs.cache
+C:\Users\Fabio van Well\Desktop\modding\FireControl\bin\Debug\netstandard2.1\FireControl.deps.json
+C:\Users\Fabio van Well\Desktop\modding\FireControl\bin\Debug\netstandard2.1\FireControl.dll
+C:\Users\Fabio van Well\Desktop\modding\FireControl\bin\Debug\netstandard2.1\FireControl.pdb
+C:\Users\Fabio van Well\Desktop\modding\FireControl\obj\Debug\netstandard2.1\FireControl.dll
+C:\Users\Fabio van Well\Desktop\modding\FireControl\obj\Debug\netstandard2.1\FireControl.pdb

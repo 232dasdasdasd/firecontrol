@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <AssemblyName>FireControl</AssemblyName>
+    <RootNamespace>FireControl</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BepInEx.Core"><HintPath>libs\BepInEx.Core.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="BepInEx.Unity.Mono"><HintPath>libs\BepInEx.Unity.Mono.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.CoreModule"><HintPath>libs\UnityEngine.CoreModule.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.IMGUIModule"><HintPath>libs\UnityEngine.IMGUIModule.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.InputLegacyModule"><HintPath>libs\UnityEngine.InputLegacyModule.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine"><HintPath>libs\UnityEngine.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Assembly-CSharp"><HintPath>libs\Assembly-CSharp.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="GameUnits"><HintPath>libs\GameUnits.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Unity.Netcode.Runtime"><HintPath>libs\Unity.Netcode.Runtime.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.TextRenderingModule"><HintPath>libs\UnityEngine.TextRenderingModule.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="0Harmony"><HintPath>libs\0Harmony.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.PhysicsModule"><HintPath>libs\UnityEngine.PhysicsModule.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.AnimationModule"><HintPath>libs\UnityEngine.AnimationModule.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.AssetBundleModule"><HintPath>libs\UnityEngine.AssetBundleModule.dll</HintPath><Private>false</Private></Reference>
+     <Reference Include="UnityEngine.UIModule"><HintPath>libs\UnityEngine.UIModule.dll</HintPath><Private>false</Private></Reference>
+      <Reference Include="UnityEngine.UI"><HintPath>libs\UnityEngine.UI.dll</HintPath><Private>false</Private></Reference>
+  </ItemGroup>
+</Project>
