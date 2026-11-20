@@ -26,10 +26,10 @@ namespace Notruf112ModMenu
         private sealed class FCVisualBackup
         {
             public MeshFilter Filter = null!;
-            public Mesh? Mesh;
-            public MeshRenderer? Renderer;
-            public Material[]? Materials;
-            public bool RendererEnabled;
+            public Mesh? Mesh = null;
+            public MeshRenderer? Renderer = null;
+            public Material[]? Materials = null;
+            public bool RendererEnabled = false;
         }
         private readonly List<FCVisualBackup> fcVisualBackups = new List<FCVisualBackup>();
 
@@ -349,7 +349,7 @@ namespace Notruf112ModMenu
             // wuerde die zwei bereits vorhandenen Unity-Animation-Clips entfernen.
             // Stattdessen Clips erhalten bzw. vom POL_FC-Prefab nachtragen.
             FCEnsureMatrixClips(entry, fcVehiclePrefab == null ? null : fcVehiclePrefab.transform.Find("Matrix"));
-            Transform sourcePanel = fcVehiclePrefab.transform.Find("VehicleCockpitPanel_RTW_Matrix");
+            Transform? sourcePanel = fcVehiclePrefab == null ? null : fcVehiclePrefab.transform.Find("VehicleCockpitPanel_RTW_Matrix");
             Transform panel = entry.Root.Find("VehicleCockpitPanel_RTW_Matrix");
             if (panel == null && sourcePanel != null)
             {
@@ -386,7 +386,7 @@ namespace Notruf112ModMenu
             Type soundType = AccessTools.TypeByName("com.crenetic.N2019Plugins.Vehicle.CarSoundController");
             Component car = carType == null ? null : entry.Root.GetComponent(carType);
             Component sound = soundType == null ? null : entry.Root.GetComponentInChildren(soundType, true);
-            AccessTools.Method(panelType, "Initialize")?.Invoke(carPanel, new object[] { car, sound, entry.Controller, matrix });
+            AccessTools.Method(panelType, "Initialize")?.Invoke(carPanel, new object?[] { car, sound, entry.Controller, matrix });
             Component[] buttons = panel.GetComponentsInChildren(buttonType, true);
             FCInstallMatrixButtonPatch();
             foreach (Component button in buttons)
@@ -479,7 +479,6 @@ namespace Notruf112ModMenu
         }
 
         private readonly List<FCRealPoliceFlash> fcRealPolice = new List<FCRealPoliceFlash>();
-        private float fcRealPoliceNextScan;
         private bool fcRealPoliceEnabled = true;
 
         // Spawn-Registrierung: kein globaler 6-Sekunden-Scan im laufenden Spiel.
@@ -1325,6 +1324,19 @@ namespace Notruf112ModMenu
             if (fcAutoPendingControllers.Count == 0) return;
             Component queuedController = fcAutoPendingControllers.Dequeue();
             if (queuedController == null || !queuedController.gameObject.scene.IsValid()) return;
+            // Billiger Vorfilter: die meisten Fahrzeuge besitzen keine FC_AUTO_-Marker.
+            // Vorher kostete selbst deren wirkungslose Registrierung etwa 40 ms pro Frame.
+            // Der Check erfolgt erst bei der Verarbeitung, damit spaet hinzugefuegte
+            // Marker aus dem Start-Frame weiterhin erkannt werden.
+            Transform? autoGroup = queuedController.transform.Find("Blaulicht");
+            if (autoGroup == null) return;
+            bool hasAutoMarker = false;
+            foreach (Transform marker in autoGroup)
+            {
+                if (marker.name.StartsWith("FC_AUTO_", StringComparison.OrdinalIgnoreCase))
+                { hasAutoMarker = true; break; }
+            }
+            if (!hasAutoMarker) return;
             var autoWatch = System.Diagnostics.Stopwatch.StartNew();
             try
             {

@@ -17,21 +17,30 @@ namespace Notruf112ModMenu
     {
         private float nextScan;
         private readonly HashSet<int> processed = new HashSet<int>();
+        private bool stationVehiclesRemoved;
+        private int remainingStartupChecks;
 
         private void Awake()
         {
             SceneManager.sceneLoaded += OnSceneLoaded;
             nextScan = 0f;
+            remainingStartupChecks = 30;
         }
 
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
             nextScan = 0f;
+            remainingStartupChecks = 30;
+            stationVehiclesRemoved = false;
+            processed.Clear();
         }
 
         private void Update()
         {
-            if (Time.unscaledTime < nextScan) return;
+            // Keine globale Unity-Objektsuche mehr im Dauerbetrieb.
+            // Spaet geladene Wachen werden in der Startphase nachtraeglich bereinigt.
+            if (stationVehiclesRemoved || remainingStartupChecks <= 0 || Time.unscaledTime < nextScan) return;
+            remainingStartupChecks--;
             nextScan = Time.unscaledTime + 2f;
             RemoveStationVehicles();
         }
@@ -55,6 +64,7 @@ namespace Notruf112ModMenu
                     if (!root.gameObject.activeInHierarchy) continue;
 
                     Transform t = container.transform;
+                    stationVehiclesRemoved = true;
                     // Rueckwaerts, damit das Entfernen von Kindern stabil bleibt.
                     for (int c = t.childCount - 1; c >= 0; c--)
                     {
